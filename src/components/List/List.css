@@ -1,0 +1,98 @@
+.List {
+	padding: 10px 0;
+	text-align: left;
+	box-sizing: border-box;
+}
+.List button {
+	padding: 10px;
+    display: inline-block;
+	margin: 10px;
+    background: #d9d9d9;
+    border: none;
+    color: #555;
+    float: left;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 0;
+	float: none;
+}
+.List button:hover {
+	cursor: pointer;
+	background: #999;
+	color: #fff;
+}
+.List ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+.NoTasks {
+	display: flex;
+	height: 20vh;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	margin: auto;
+	font-size: 20px;
+}
+.Task_wrap {
+	padding: 0 20px 0 10px;
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	position: relative;	
+}
+
+.Task {
+	padding: 0 0 0 40px;
+	background: #eee;
+	box-sizing: border-box;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	z-index: 1;
+	position: relative;	
+}
+.TaskItem {
+	width: 100%;
+}
+.Active {
+	background: #888;
+    color: #fff;
+}
+.Active span{
+	text-decoration: line-through;
+}
+.Active:before {
+    content: '';
+    position: absolute;
+    border-color: #fff;
+    border-style: solid;
+    border-width: 0 2px 2px 0;
+    top: 16px;
+    left: 16px;
+    transform: rotate(45deg);
+    height: 15px;
+    width: 7px;
+}
+.Task:hover {
+	cursor: pointer;
+}
+.Del {
+	font-weight: bold;	
+	text-decoration: none !important;
+	text-decoration-line: none !important;
+	padding: 15px;
+	color: #000;
+	z-index: 555;
+}
+.Del:hover {
+	cursor: pointer;
+	font-weight: bold;	
+	background-color: #f44336;
+}
