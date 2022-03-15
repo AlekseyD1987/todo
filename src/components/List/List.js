@@ -1,47 +1,39 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import './List.css'
 import PropTypes from 'prop-types'
+import {Context} from '../../context'
 
 function List(props) {
+
+  const {handleCheck, handleAllCheck, handleFinish, handleDelTd} = useContext(Context)
+
   const renderButtons = () => {
     let btn = null
     if (props.taskData.length > 0) {
-      return <div><button onClick={() => checkAllTasks(true)}>Выбрать все</button><button style={{display: isChecked()}} onClick={() => checkAllTasks(false)}>Снять выделение</button></div>
+      return <div><button onClick={() => handleAllCheck(true)}>Выбрать все</button><button style={{display: isChecked()}} onClick={() => handleAllCheck(false)}>Снять выделение</button></div>
     }
     return btn 
   }
   const changeAllTasks = () => {
     for (let i = (props.taskData).length; i--; ) {
       if ((props.taskData)[i].check) {
-        props.onFinish(props.taskData[i].id)
+        handleFinish(props.taskData[i].id)
       }
     }		
   }
   const dellAllTasks = () => {
     for (let i = (props.taskData).length; i--; ) {
       if ((props.taskData)[i].check) {
-	      props.onDelTd(props.taskData[i].id)
+	      handleDelTd(props.taskData[i].id)
 	    }
     }
   }
-  const checkAllTasks = type => {	 
-	  props.allCheck(type);
-  } 
   const isChecked = () => {
     let show = 'none'
     for (let i = (props.taskData).length; i--; ) {
       if (props.taskData[i].check) { show = 'inline-block'}		
     } 
     return show	
-  }
-  const onDelButton = id => {
-    props.onDelTd(id);
-  }  
-  const onCheckTask = id => {
-    props.onCheck(id);
-  }
-  const changeTask = id => {
-    props.onFinish(id);
   }
   return (       
 		<div className="List">	
@@ -59,13 +51,13 @@ function List(props) {
           return (
             <li className="Task_wrap" key={item.id}> 
               <span>
-                <input type="checkbox" id={item.id} onChange={() => onCheckTask(item.id)} checked={chk}/>
+                <input type="checkbox" id={item.id} onChange={() => handleCheck(item.id)} checked={chk}/>
               </span>
               <span className={cls.join(' ')}>
-                <span className="TaskItem" onClick={() => changeTask(item.id)}>		   
+                <span className="TaskItem" onClick={() => handleFinish(item.id)}>		   
                   {item.task}
                 </span>			
-                <span className="Del" onClick={() => onDelButton(item.id)}>X</span>	
+                <span className="Del" onClick={() => handleDelTd(item.id)}>X</span>	
               </span>
             </li>
           )
@@ -76,9 +68,5 @@ function List(props) {
 }
 List.propTypes = {
   taskData: PropTypes.array.isRequired,
-  onCheck: PropTypes.func.isRequired,
-  onFinish: PropTypes.func.isRequired,
-  onDelTd: PropTypes.func.isRequired,
-  allCheck: PropTypes.func.isRequired
 }
 export default List

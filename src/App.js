@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Add from './components/Add/Add';
 import List from './components/List/List';
+import {Context} from './context'
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -51,17 +52,24 @@ function App() {
   }	  
   const renderList = () => {
     if (tasks.length > 0) {
-      return <List taskData={tasks} allCheck={handleAllCheck} onCheck={handleCheck} onFinish={handleFinish} onDelTd={handleDelTd}/>
+      return <List taskData={tasks}/>
     }
     else {
       return <div className="NoTasks">No tasks</div>
     }
   }
   return (
-    <div>	  
-      <Add onAddTd={handleAddTd} />
-      {renderList()}      
-    </div>
+    <Context.Provider value={{
+      handleCheck, 
+      handleAllCheck,
+      handleFinish,
+      handleDelTd
+    }}>
+      <div>	  
+        <Add onAddTd={handleAddTd} />
+        {renderList()}      
+      </div>
+    </Context.Provider>
   )  
 }
 export default App;
